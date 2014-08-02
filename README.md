@@ -1,0 +1,4 @@
+homie
+=====
+
+Home automization tool
