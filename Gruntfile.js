@@ -280,7 +280,9 @@ module.exports = function (grunt) {
 								'backbone',
 								'underscore',
 								'text',
-								'fastclick'
+								'fastclick',
+								'chartjs',
+								'moment'
                             ]
                         },
                         // Now set up a build layer for each main layer, but exclude the common one.
@@ -396,15 +398,14 @@ module.exports = function (grunt) {
 		rsync: {
 			options: {
 				args: ["--verbose"],
-				exclude: [".git*","*.scss","node_modules", "webroot/json/*.*"],
+				exclude: [".git*","*.scss","node_modules", "logAM2302.json"],
 				recursive: true
 			},
 			dist: {
 				options: {
 					src: "webroot-built/",
-					dest: "/opt/z-way-server/htdocs/homie",
-					host: "pi@192.168.1.41",
-					syncDestIgnoreExcl: true
+					dest: "www/",
+					host: "pi@192.168.1.41"
 				}
 			}
 		}
@@ -452,15 +453,30 @@ module.exports = function (grunt) {
         'compass',
 //        'csslint',
 //        'jshint',
-        'connect',
+//        'connect',
         // 'karma:continuous', // Run the tests specified in the continuous target using the already running karma server.
         'requirejs',
         //'yuidoc',
         'imagemin',
         'concat',
-		'rsync'
+//		'rsync'
 //		'copy:dist'
     ]);
+
+	grunt.registerTask('deploy', [
+		'buildhtml',
+		'compass',
+//        'csslint',
+//        'jshint',
+//		'connect',
+		// 'karma:continuous', // Run the tests specified in the continuous target using the already running karma server.
+		'requirejs',
+		//'yuidoc',
+		'imagemin',
+		'concat',
+		'rsync'
+//		'copy:dist'
+	]);
 
     // The icons generator would be run by typing "grunt icons" on the command line.
     grunt.registerTask('makeicons', [

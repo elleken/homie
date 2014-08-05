@@ -15,7 +15,8 @@
     "graphite-lib": "~0.2.2",
     "modernizr": "~2.7.2",
     "requirejs-text": "~2.0.12",
-    "chartjs": "~0.2.0"
+    "chartjs": "~0.2.0",
+    "moment": "~2.8.1"
   },
   "devDependencies": {}
 }

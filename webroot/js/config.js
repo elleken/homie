@@ -37,6 +37,7 @@ require.config({
         fastclick : '../lib/fastclick/lib/fastclick',
 		triggerPath: '../js/vendors/jquery.triggerPath',
 		chartjs: '../lib/chartjs/Chart.min',
+		moment: '../lib/moment/moment',
 
 		// Graphite
 		graphite_storage : '../lib/graphite-lib/components/_base/js/graphite-storage',

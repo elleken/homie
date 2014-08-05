@@ -4,3 +4,16 @@
 // @ Theme settings and base Graphite lib
 @import "../lib/graphite-lib/components/graphite";
 
+.c_chart{
+	width: 100% !important;
+	max-width: 100%;
+	height: auto !important;
+}
+
+h1{
+	line-height: 1.2em;
+	color:#D4D4D4;
+}
+body{
+	background: #292929;
+}

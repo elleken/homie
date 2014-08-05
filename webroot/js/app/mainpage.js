@@ -20,9 +20,10 @@ require([
 	//Plugins
 	'fastclick',
 	'triggerPath',
-	'chartjs'
+	'chartjs',
+	'moment'
 
-], function ( $, G, requiretext, underscore, pubsub, utils, responsive, fastclick, triggerPath, chartjs) {
+], function ( $, G, requiretext, underscore, pubsub, utils, responsive, fastclick, triggerPath, chartjs, moment) {
 
 	'use strict';
 
@@ -51,7 +52,6 @@ require([
 //			console.log(data);
 //
 //		});
-
 		// Get context with jQuery - using jQuery's .get() method.
 		var $tempChart = $("#temperatureChart").get(0).getContext("2d"),
 			$humidChart = $("#humidityChart").get(0).getContext("2d"),
@@ -75,11 +75,13 @@ require([
 			var labels = [],
 				temperatures = [],
 				humidities = [];
-			_.each(data, function(object) {
-				labels.push(object.timestamp);
+			_.each(data, function(object, i) {
+				var dateMoment = moment(object.timestamp).format('D-M-YY HH:MM');
+				labels.push(dateMoment);
 				temperatures.push(parseFloat(object.temperature));
 				humidities.push(parseFloat(object.humidity));
 			})
+
 			var temperatureDataSet = [{
 				label: "Temperature",
 				fillColor: "rgba(220,220,220,0.2)",
