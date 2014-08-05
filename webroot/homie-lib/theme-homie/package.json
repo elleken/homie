@@ -1,0 +1,16 @@
+{
+	"name": "Lbi-icons-generation",
+	"version": "1.0.3",
+	"description": "Common automated icon generation",
+	"main": "Gruntfile.js",
+	"author": "Rasmus Elken",
+	"license": "MIT license",
+	"readmeFilename": "README.html",
+	"dependencies": {},
+	"devDependencies": {
+		"grunt": "~0.4.1",
+		"grunt-webfont": "~0.3.2",
+		"grunt-grunticon": "1.0.0"
+
+	}
+}

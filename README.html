@@ -1,0 +1,149 @@
+<!doctype html>
+
+<!-- 
+    ===========================================================================
+    AKIPLATE
+
+    @author Aki Karkkainen - aki.karkkainen@lbi.com
+    @author Rasmus Bangsted Pedersen - rasmus.pedersen@lbi.com
+    @author Rasmus Elken - rasmus.elken@lbi.com
+
+    @version - $Id: README.html 43 2013-09-24 08:26:09Z niebje $
+    @version - $Id: README.html 44 2013-01-28 14:36:00Z rasped $
+
+    ===========================================================================
+-->
+
+<html class="no-js" lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Environment setup</title>
+
+        <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+
+            body {
+                /* background: #F1001C; */
+                font-family: arial, sans-serif;
+                padding: 0;
+                margin: 0;                
+            }
+
+            .l-wrap {
+                width: 75%;
+                margin: 0 auto;
+                padding: 1em 2%;
+                background: #fff;
+            }
+
+            pre {
+                background: #eee;
+                padding: 0.5em;
+            }
+
+            .code-inline {
+                background: #eee;
+                padding: 0.3em;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="l-wrap">
+
+            <h1>[insert project name here]</h1>
+            
+            <p>[insert project description here]</p>
+            
+            <table>
+                <thead>
+                    <th colspan="2">Project details</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Client</td>
+                        <td>[company], [contact_person], [email]</td>
+                    </tr>
+                    <tr>
+                        <td>Project lead</td>
+                        <td>[name], [email]</td>
+                    </tr>
+                    <tr>
+                        <td>Development lead</td>
+                        <td>[name], [email]</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <hr/>
+            
+            <h2>Installing</h2>
+            
+            <p><strong>Prerequisites</strong></p>
+            <ul>
+                <li>Ruby</li>
+                <li>Sass</li>
+                <li>Compass</li>
+                <li>Node.js & npm</li>
+                <li>Bower</li>
+                <li>Grunt and grunt cli</li>
+            </ul>
+            
+            <h3>Ruby</h3>
+
+            <p>On OS X, you'll already have Ruby installed. On Windows, see <a href="http://rubyinstaller.org/downloads/">http://rubyinstaller.org/downloads/</a>.</p>
+
+            <h3>Sass/Compass</h3>
+
+            <p>Make sure you have Ruby installed before this step.</p>
+            <p>Install Sass: <a href="http://sass-lang.com/tutorial.html">http://sass-lang.com/tutorial.html</a>.</p>
+            <p>Install Compass: <a href="http://compass-style.org/install/">http://compass-style.org/install/</a>.</p>
+
+            <h3>Node.js</h3>
+
+            <p>Install Node.js with npm (package manager for Node): <a href="http://nodejs.org/">http://nodejs.org/</a>.</p>
+
+            <h3>Bower</h3>
+
+            <p>Install Bower front-end package manager (http://bower.io/): <code class="code-inline">npm install -g bower</code></p>
+
+            <p>Then install all the fronend bower dependencies by running: <code class="code-inline">bower install</code></p>
+            
+            <p>In order to work around the LBi wall of fire, configure your GIT installation to use https:// instead of git://. This is done by executing the command:<br> <code class="code-inline">git config --global url."https://".insteadOf git://</code>
+
+            <p>If the above does not work, you might want to install the packages on a Mac and then commit the files into the repository.
+            Packages that Bower installs are currently not included in this repository.</p>
+
+            <p>However if Bower works in your environment you'll probably want to manage your 
+            front-end library packages with it. To do so (after installing bower globally), 
+            go to the project folder and install/update packages using the dependencies 
+            listed in the current directory's bower.json: <code class="code-inline">bower install</code></p>
+
+            <h3>Grunt</h3>
+
+            <p>See <a href="http://gruntjs.com/getting-started">http://gruntjs.com/getting-started</a>.</p>
+
+            <p>After installing grunt-cli, go to the project folder and install grunt locally: <code class="code-inline">npm install grunt</code></p>
+
+            <p>Now install all the dependencies locally (listed in package.json): <code class="code-inline">npm install</code></p>
+
+            <p>That's it.</p>
+
+            <h2>Development and build</h2>
+
+            <p>To start developing, go to the project folder and run <code class="code-inline">grunt</code> in your terminal. Then go to <a href="http://localhost:9001/">http://localhost:9001/</a> to view your site. You can also access your local site from another device on the same LAN by using your IP address instead of `localhost`, for example http://157.125.83.183:9001/. Files are being observed for changes using livereload so you don't need to refresh the page manually. Stylesheets are generated from Sass files, and CSS and JavaScript files are linted.</p>
+
+            <p>To trigger the optimized build, go to the project folder and run <code class="code-inline">grunt dist</code> that will run all the tasks again and copy the optimized files to `webroot-built` directory, ready for deployment. You also get YUIDoc documentation generated from your JavaScript files so remember to always comment your code ;). </p>
+
+            <p>For details about all the tasks and processes, see documentation in Gruntfile.js and other files, and in Confluence.</p>
+
+            <p>Be sure to exclude `node_modules` and `webroot-built` directories from version control.</p>
+ 
+            <p>This documentation will be extended in future. Happy coding!</p>
+
+    </div>
+</body>
+</html>
