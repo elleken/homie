@@ -52,6 +52,13 @@ require([
 //			console.log(data);
 //
 //		});
+
+
+		$.getJSON( "json/getAM2302.json", function( data ) {
+			console.log(data);
+			$('#currentTemp').text(data.temperature + ' ℃');
+			$('#currentHumid').text(data.humidity + ' %');
+		});
 		// Get context with jQuery - using jQuery's .get() method.
 		var $tempChart = $("#temperatureChart").get(0).getContext("2d"),
 			$humidChart = $("#humidityChart").get(0).getContext("2d"),
@@ -60,7 +67,10 @@ require([
 			_chartOptionsGeneral = {
 				pointDot : false,
 				datasetStrokeWidth : 1,
-				responsive: true
+				responsive: true,
+				scaleOverlay : true,
+				scaleGridLineColor : "rgba(255,255,255,0.2)",
+				scaleGridLineWidth: 0.5
 			},
 			_chartOptionsTemp = _.extend({
 				scaleLabel: "<%=value%> ℃"
@@ -77,10 +87,17 @@ require([
 				humidities = [];
 			_.each(data, function(object, i) {
 				var dateMoment = moment(object.timestamp).format('D-M-YY HH:MM');
-				labels.push(dateMoment);
+				if(i == 0 || i == data.length-1 || i%12==0){
+					labels.push(dateMoment);
+				} else {
+					labels.push('.')
+				}
 				temperatures.push(parseFloat(object.temperature));
 				humidities.push(parseFloat(object.humidity));
 			})
+			labels.reverse();
+			temperatures.reverse();
+			humidities.reverse();
 
 			var temperatureDataSet = [{
 				label: "Temperature",

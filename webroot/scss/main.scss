@@ -1,19 +1,37 @@
-// Global theme settings
+	// Global theme settings
 
-// ========================================================================== //
-// @ Theme settings and base Graphite lib
-@import "../lib/graphite-lib/components/graphite";
+	// ========================================================================== //
+	// @ Theme settings and base Graphite lib
+	@import "../lib/graphite-lib/components/graphite";
 
-.c_chart{
-	width: 100% !important;
-	max-width: 100%;
-	height: auto !important;
-}
+	.c_chart-container{
+		width: 100% !important;
+		max-width: 100%;
+		height: auto !important;
+		overflow: scroll;
+	}
 
-h1{
-	line-height: 1.2em;
-	color:#D4D4D4;
-}
-body{
-	background: #292929;
-}
+	h1, h2{
+		line-height: 1.2em;
+		color:#D4D4D4;
+	}
+	body{
+		background: #292929;
+	}
+	header{
+		background: #090909;
+		h1{
+			text-transform: uppercase;
+		}
+	}
+
+	#currentMeasures{
+		background: #f4f4f4;
+		h1,h2{
+			color: #393939
+		}
+	}
+	#graphMeasures{
+		margin-top: 2em;
+//		background: #191919;
+	}

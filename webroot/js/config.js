@@ -35,8 +35,8 @@ require.config({
 		text : '../lib/requirejs-text/text',
         parse : '../js/vendors/parse.min',
         fastclick : '../lib/fastclick/lib/fastclick',
-		triggerPath: '../js/vendors/jquery.triggerPath',
-		chartjs: '../lib/chartjs/Chart.min',
+		triggerPath: '../js/vendors/jquery.triggerpath',
+		chartjs: '../lib/chartjs/Chart',
 		moment: '../lib/moment/moment',
 
 		// Graphite

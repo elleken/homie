@@ -1,8 +1,23 @@
-<div class="c_row">
-	<div class="column small-12">
-        <h1>Temperature & Humidity</h1>
+<header class="c_row">
+	<div class="column small-12 text-center">
+        <h1>Dashboard</h1>
 	</div>
-	<div class="column small-12">
-	    {{> chart}}
+</header>
+
+<section class="c_row full-width" id="currentMeasures">
+	<div class="c_row">
+	<div class="column medium-6 text-center">
+		<h2>Current temperature</h2>
+		<h1 id="currentTemp"></h1>
 	</div>
-</div>
+	<div class="column medium-6 text-center">
+		<h2>Current humidity</h2>
+		<h1 id="currentHumid"></h1>
+	</div>
+</section>
+
+<section class="c_row" id="graphMeasures">
+	<div class="column small-12">
+		{{> chart}}
+	</div>
+</section>

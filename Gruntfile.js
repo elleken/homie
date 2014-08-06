@@ -398,14 +398,14 @@ module.exports = function (grunt) {
 		rsync: {
 			options: {
 				args: ["--verbose"],
-				exclude: [".git*","*.scss","node_modules", "logAM2302.json"],
+				exclude: [".git*","*.scss","node_modules", "json/*.json"],
 				recursive: true
 			},
 			dist: {
 				options: {
-					src: "webroot-built/",
+					src: "webroot/",
 					dest: "www/",
-					host: "pi@192.168.1.41"
+					host: "pi@90.185.133.93"
 				}
 			}
 		}

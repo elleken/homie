@@ -35,9 +35,9 @@
 
 	<!-- Fav and touch icons-->
 	<link rel="shortcut icon" href="" />
-	<link rel="apple-touch-icon-precomposed" href="//www.cbb.dk/images/cbb/apple-touch-icon.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="//www.cbb.dk/images/cbb/apple-touch-icon-114x114-precomposed.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="//www.cbb.dk/images/cbb/apple-touch-icon-144x144-precomposed.png" />
+	<!--<link rel="apple-touch-icon-precomposed" href="//www.cbb.dk/images/cbb/apple-touch-icon.png" />-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="//www.cbb.dk/images/cbb/apple-touch-icon-114x114-precomposed.png" />-->
+	<!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="//www.cbb.dk/images/cbb/apple-touch-icon-144x144-precomposed.png" />-->
 
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -56,16 +56,36 @@
 <body>
 
 <div class="main-container">
-    <div class="c_row">
-	<div class="column small-12">
-        <h1>Temperature & Humidity</h1>
+    <header class="c_row">
+	<div class="column small-12 text-center">
+        <h1>Dashboard</h1>
 	</div>
+</header>
+
+<section class="c_row full-width" id="currentMeasures">
+	<div class="c_row">
+	<div class="column medium-6 text-center">
+		<h2>Current temperature</h2>
+		<h1 id="currentTemp"></h1>
+	</div>
+	<div class="column medium-6 text-center">
+		<h2>Current humidity</h2>
+		<h1 id="currentHumid"></h1>
+	</div>
+</section>
+
+<section class="c_row" id="graphMeasures">
 	<div class="column small-12">
-	    <canvas class="c_chart" id="temperatureChart" height="200" width="960"></canvas>
-<canvas class="c_chart" id="humidityChart" height="200" width="960"></canvas>
+		<div class="c_chart-container">
+	<h2>Temperature</h2>
+	<canvas class="c_chart" id="temperatureChart" height="400" width="1500"></canvas>
+
+	<h2>Humidity</h2>
+	<canvas class="c_chart" id="humidityChart" height="400" width="1500"></canvas>
+</div>
 
 	</div>
-</div>
+</section>
 </div>
 
 <script data-main="/js/config" src="/lib/requirejs/require.js"></script>
