@@ -272,14 +272,14 @@ module.exports = function (grunt) {
                             name: 'config',
                             // List common dependencies here. Only need to list top level dependencies, "include" will find nested dependencies.
                             include: [
-								'graphite',
-								'graphite_utilities',
-								'graphite_responsive',
+//								'graphite',
+//								'graphite_utilities',
+//								'graphite_responsive',
                                 'jquery',
-								'handlebars',
-								'backbone',
+//								'handlebars',
+//								'backbone',
 								'underscore',
-								'text',
+//								'text',
 								'fastclick',
 								'chartjs',
 								'moment'
@@ -403,7 +403,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				options: {
-					src: "webroot/",
+					src: "webroot-built/",
 					dest: "www/",
 					host: "pi@90.185.133.93"
 				}

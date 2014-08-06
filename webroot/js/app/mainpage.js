@@ -8,22 +8,22 @@ require([
 
 	// core
 	'jquery',
-	'graphite',
-	'text',
+//	'graphite',
+//	'text',
 	'underscore',
 	// extensions
 
-	'graphite_pubsub',
-	'graphite_utilities',
-	'graphite_responsive',
+//	'graphite_pubsub',
+//	'graphite_utilities',
+//	'graphite_responsive',
 
 	//Plugins
 	'fastclick',
-	'triggerPath',
+//	'triggerPath',
 	'chartjs',
 	'moment'
 
-], function ( $, G, requiretext, underscore, pubsub, utils, responsive, fastclick, triggerPath, chartjs, moment) {
+], function ( $, underscore, fastclick, chartjs, moment) {
 
 	'use strict';
 
