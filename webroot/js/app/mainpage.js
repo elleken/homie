@@ -8,8 +8,8 @@ require([
 
 	// core
 	'jquery',
-//	'graphite',
-//	'text',
+	'graphite',
+	'text',
 	'underscore',
 	// extensions
 
@@ -21,9 +21,10 @@ require([
 	'fastclick',
 //	'triggerPath',
 	'chartjs',
+	'c_chart',
 	'moment'
 
-], function ( $, underscore, fastclick, chartjs, moment) {
+], function ( $, G, text, underscore, fastclick, chartjs, c_chart, moment) {
 
 	'use strict';
 
@@ -36,6 +37,96 @@ require([
 	 */
 	$(function () {
 		var ZWaveAPIData = { updateTime: 0 };
+
+
+		// ADD CHARTS
+		if ( $('.c_chart').length>0 ) {
+			require(["text!../json/logAM2302.json"], function(dataAM2302) {
+				var temperatureChart = G.initialize('c_chart', {
+					el: $('#temperatureChart'),
+					scaleLabel: "<%=value%> ℃",
+					data: function () {
+						var labels = [],
+							temperatures = [];
+						var data = $.parseJSON(dataAM2302);
+						_.each(data, function (object, i) {
+							var dateMoment = moment(object.timestamp).format('D-M-YY HH:MM');
+							if (i == 0 || i == data.length - 1 || i % 6 == 0) {
+								labels.push(dateMoment);
+							} else {
+								labels.push('.')
+							}
+							temperatures.push(parseFloat(object.temperature));
+						})
+						labels.reverse();
+						temperatures.reverse();
+						var temperatureDataSet = [
+							{
+								label: "Temperature",
+								fillColor: "rgba(220,220,220,0.2)",
+								strokeColor: "rgba(220,220,220,1)",
+								pointColor: "rgba(220,220,220,1)",
+								pointStrokeColor: "#fff",
+								pointHighlightFill: "#fff",
+								pointHighlightStroke: "rgba(220,220,220,1)",
+								data: temperatures
+							}
+						];
+						//
+						var temperatureChartData = {
+							labels: labels,
+							datasets: temperatureDataSet
+						};
+						return temperatureChartData;
+					}
+				});
+
+				var humidityChart = G.initialize('c_chart', {
+					el: $('#humidityChart'),
+					scaleLabel: "<%=value%> %",
+					data: function () {
+						var labels = [],
+							humidities = [];
+
+						var data = $.parseJSON(dataAM2302);
+						_.each(data, function (object, i) {
+							var dateMoment = moment(object.timestamp).format('D-M-YY HH:MM');
+							if (i == 0 || i == data.length - 1 || i % 6 == 0) {
+								labels.push(dateMoment);
+							} else {
+								labels.push('.')
+							}
+							humidities.push(parseFloat(object.humidity));
+						})
+						labels.reverse();
+						humidities.reverse();
+						var humidityDataSet = [
+							{
+								label: "Temperature",
+								fillColor: "rgba(220,220,220,0.2)",
+								strokeColor: "rgba(220,220,220,1)",
+								pointColor: "rgba(220,220,220,1)",
+								pointStrokeColor: "#fff",
+								pointHighlightFill: "#fff",
+								pointHighlightStroke: "rgba(220,220,220,1)",
+								data: humidities
+							}
+						];
+						//
+						var humidityChartData = {
+							labels: labels,
+							datasets: humidityDataSet
+						};
+						return humidityChartData;
+					}
+				});
+			});
+		}
+		// ADD Current temp and humid.
+		$.getJSON( "json/getAM2302.json", function( data ) {
+			$('#currentTemp').text(data.temperature + ' ℃');
+			$('#currentHumid').text(data.humidity + ' %');
+		});
 
 		// Init ZWaveAPIData structure
 //		$.triggerPath.init(ZWaveAPIData);
@@ -54,92 +145,35 @@ require([
 //		});
 
 
-		$.getJSON( "json/getAM2302.json", function( data ) {
-			console.log(data);
-			$('#currentTemp').text(data.temperature + ' ℃');
-			$('#currentHumid').text(data.humidity + ' %');
-		});
-		// Get context with jQuery - using jQuery's .get() method.
-		var $tempChart = $("#temperatureChart").get(0).getContext("2d"),
-			$humidChart = $("#humidityChart").get(0).getContext("2d"),
-			_tempChart,
-			_humidChart,
-			_chartOptionsGeneral = {
-				pointDot : false,
-				datasetStrokeWidth : 1,
-				responsive: true,
-				scaleOverlay : true,
-				scaleGridLineColor : "rgba(255,255,255,0.2)",
-				scaleGridLineWidth: 0.5
-			},
-			_chartOptionsTemp = _.extend({
-				scaleLabel: "<%=value%> ℃"
-			}, _chartOptionsGeneral),
-			_chartOptionsHumid = _.extend({
-				scaleLabel: "<%=value%> %"
-			}, _chartOptionsGeneral);
+//		var now = Math.round((new Date()).getTime() / 1000);
+		var devices = [];
+		$.getJSON( "http://192.168.1.41:8083/ZWaveAPI/Data/0", function( data ) {
+			ZWaveAPIData = data;
+			_.each(ZWaveAPIData.devices, function (node, nodeId) {
+				var controllerNodeId = ZWaveAPIData.controller.data.nodeId.value;
+				if (nodeId == 255 || nodeId == controllerNodeId)
+				// We skip broadcase and self
+					return;
+				var nodeObj = {};
 
-		// This will get the first returned node in the jQuery collection.
-//		var _chart = null;
-		$.getJSON( "json/logAM2302.json", function( data ) {
-			var labels = [],
-				temperatures = [],
-				humidities = [];
-			_.each(data, function(object, i) {
-				var dateMoment = moment(object.timestamp).format('D-M-YY HH:MM');
-				if(i == 0 || i == data.length-1 || i%12==0){
-					labels.push(dateMoment);
-				} else {
-					labels.push('.')
-				}
-				temperatures.push(parseFloat(object.temperature));
-				humidities.push(parseFloat(object.humidity));
-			})
-			labels.reverse();
-			temperatures.reverse();
-			humidities.reverse();
+				// Device status and battery
+				nodeObj.basicType = node.data.basicType.value;
+				nodeObj.genericType = node.data.genericType.value;
+				nodeObj.specificType = node.data.specificType.value;
+				nodeObj.isListening = node.data.isListening.value;
+				nodeObj.isFLiRS = !nodeObj.isListening && (node.data.sensor250.value || node.data.sensor1000.value);
+				nodeObj.hasWakeup = 0x84 in node.instances[0].commandClasses;
+				nodeObj.hasBattery = 0x80 in node.instances[0].commandClasses;
+				// DO stuff width device.
+				devices.push(node);
+				console.log(node.data.name);
+				
 
-			var temperatureDataSet = [{
-				label: "Temperature",
-				fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(220,220,220,1)",
-				data: temperatures
-			}];
+				$('body').prepend('<div>'+node.data.name+'</div>');
+			});
 
-			var humidDataSet = [{
-				label: "Humidity",
-				fillColor: "rgba(151,187,205,0.2)",
-				strokeColor: "rgba(151,187,205,1)",
-				pointColor: "rgba(151,187,205,1)",
-				pointStrokeColor: "#fff",
-				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(151,187,205,1)",
-				data: humidities
-			}];
-
-			var temperatureChartData = {
-				labels: labels,
-				datasets: temperatureDataSet
-			};
-			var humidityChartData = {
-				labels: labels,
-				datasets: humidDataSet
-			};
-
-			_tempChart = new Chart($tempChart).Line(temperatureChartData, _chartOptionsTemp);
-			_humidChart = new Chart($humidChart).Line(humidityChartData, _chartOptionsHumid);
 
 		});
-
-		var now = Math.round((new Date()).getTime() / 1000);
-
-//		$.getJSON( "http://192.168.1.41:8083/ZWaveAPI/Data/0", function( data ) {
-//			ZWaveAPIData = data;
-//			console.log(ZWaveAPIData);
 ////				$.each(ZWaveAPIData.devices, function (nodeId, node) {
 ////					var controllerNodeId = ZWaveAPIData.controller.data.nodeId.value;
 ////					var device = {};

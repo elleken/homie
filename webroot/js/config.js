@@ -36,7 +36,6 @@ require.config({
         parse : '../js/vendors/parse.min',
         fastclick : '../lib/fastclick/lib/fastclick',
 		triggerPath: '../js/vendors/jquery.triggerpath',
-		chartjs: '../lib/chartjs/Chart',
 		moment: '../lib/moment/moment',
 
 		// Graphite
@@ -45,7 +44,11 @@ require.config({
 
 		graphite_utilities : '../lib/graphite-lib/components/_base/js/graphite-utilities',
 		graphite_responsive : '../lib/graphite-lib/components/_base/js/graphite-responsive',
-		graphite_cookie : '../lib/graphite-lib/components/_base/js/graphite-cookie'
+		graphite_cookie : '../lib/graphite-lib/components/_base/js/graphite-cookie',
+
+		//components
+		chartjs: '../homie-lib/components/c_chart/Chart',
+		c_chart: '../homie-lib/components/c_chart/c_chart'
 
 
 
