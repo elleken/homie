@@ -1,4 +1,8 @@
 {
-    "directory": "webroot/lib",
-    "json": "bower.json"
+	"directory": "webroot/lib",
+	"json": "bower.json",
+	"registry": "http://bower.lbicph.com:8080",
+	"registry.search": "http://bower.lbicph.com:8080",
+	"registry.register": "http://bower.lbicph.com:8080",
+	"registry.publish": "http://bower.lbicph.com:8080"
 }
